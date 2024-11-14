@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -10,5 +10,8 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 
 export class LayoutComponent {
-
+  constructor(private router: Router) { }
+  logout() {
+    this.router.navigateByUrl('login')
+  }
 }
