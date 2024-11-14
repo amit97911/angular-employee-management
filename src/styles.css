@@ -1,2 +1,9 @@
 @import url('bootstrap');
 @import url('bootstrap-icons');
+
+.form-control{
+    border: 1px solid !important;
+}
+.form-select{
+    border: 1px solid !important;
+}
