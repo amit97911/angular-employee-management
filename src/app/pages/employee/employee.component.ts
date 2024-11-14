@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MasterService } from '../../service/master.service';
 import { IParentDeptResponse, IParentDept, IChildDept, IChildDeptResponse } from '../../model/interface/master';
 import { FormsModule } from '@angular/forms';
+import { Employee } from '../../model/class/employee';
 
 @Component({
   selector: 'app-employee',
@@ -16,6 +17,7 @@ export class EmployeeComponent implements OnInit {
   parentDeptList = signal<IParentDept[]>([]);
   childDeptList = signal<IChildDept[]>([]);
   parentDeptId: number = 0;
+  employeeObj: Employee = new Employee();
 
   ngOnInit(): void {
     this.getParentDept();
@@ -29,8 +31,19 @@ export class EmployeeComponent implements OnInit {
 
   onParentDeptChange() {
     this.masterService.getChildDepartmentByParentId(this.parentDeptId).subscribe((res: IChildDeptResponse) => {
-      console.log(res.data)
       this.childDeptList.set(res.data);
     });
   }
+
+  onSave() {
+    this.masterService.CreateEmployee(this.employeeObj).subscribe(
+      (res: Employee) => {
+        console.log(res);
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    )
+  }
+
 }

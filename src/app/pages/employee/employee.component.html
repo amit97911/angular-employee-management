@@ -18,18 +18,19 @@
             <div class="col-md-6">
                 <label for="employeeName" class="form-label">Employee Name</label>
                 <input type="text" class="form-control" id="employeeName" name="employee_name"
-                    placeholder="Enter employee name">
+                    [(ngModel)]="employeeObj.employeeName" placeholder="Enter employee name">
             </div>
             <div class="col-md-6">
                 <label for="contactNo" class="form-label">Contact No</label>
                 <input type="text" class="form-control" id="contactNo" name="contact_no"
-                    placeholder="Enter contact number">
+                    [(ngModel)]="employeeObj.contactNo" placeholder="Enter contact number">
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <label for="emailId" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="emailId" placeholder="Enter email">
+                <input type="email" class="form-control" name="email" id="emailId" [(ngModel)]="employeeObj.emailId"
+                    placeholder="Enter email">
             </div>
             <div class="col-md-4">
                 <label for="parentDept" class="form-label">Parent Department</label>
@@ -52,17 +53,19 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                <input type="password" class="form-control" id="password" name="password"
+                    [(ngModel)]="employeeObj.password" placeholder="Enter password">
             </div>
             <div class="col-md-6">
                 <label for="role" class="form-label">Role</label>
-                <input type="text" class="form-control" id="role" name="role" placeholder="Enter role">
+                <input type="text" class="form-control" id="role" name="role" [(ngModel)]="employeeObj.role"
+                    placeholder="Enter role">
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label for="gender" class="form-label" name="gender">Gender</label>
-                <select id="gender" class="form-select">
+                <label for="gender" class="form-label">Gender</label>
+                <select id="gender" class="form-select" name="gender" [(ngModel)]="employeeObj.gender">
                     <option selected>Select gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -70,7 +73,7 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="submit" (click)="onSave()" class="btn btn-primary mt-3">Submit</button>
     </form>
     }
 
