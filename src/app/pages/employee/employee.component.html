@@ -17,50 +17,51 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="employeeName" class="form-label">Employee Name</label>
-                <input type="text" class="form-control" id="employeeName" placeholder="Enter employee name">
+                <input type="text" class="form-control" id="employeeName" name="employee_name"
+                    placeholder="Enter employee name">
             </div>
             <div class="col-md-6">
                 <label for="contactNo" class="form-label">Contact No</label>
-                <input type="text" class="form-control" id="contactNo" placeholder="Enter contact number">
+                <input type="text" class="form-control" id="contactNo" name="contact_no"
+                    placeholder="Enter contact number">
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <label for="emailId" class="form-label">Email</label>
-                <input type="email" class="form-control" id="emailId" placeholder="Enter email">
+                <input type="email" class="form-control" name="email" id="emailId" placeholder="Enter email">
             </div>
             <div class="col-md-4">
                 <label for="parentDept" class="form-label">Parent Department</label>
-                <select id="parentDept" class="form-select">
-                    <option selected>Select department</option>
+                <select id="parentDept" class="form-select" [(ngModel)]="parentDeptId" (change)="onParentDeptChange()"
+                    name="parent_dept">
                     @for(item of parentDeptList(); track $index){
                     <option [value]="item.departmentId">{{item.departmentName}}</option>
                     }
-                    <!-- Department options -->
                 </select>
             </div>
             <div class="col-md-4">
                 <label for="childDept" class="form-label">Child Department</label>
-                <select id="childDept" class="form-select">
-                    <option selected>Select department</option>
-
-                    <!-- Department options -->
+                <select id="childDept" class="form-select" name="child_dept">
+                    @for(item of childDeptList(); track $index){
+                    <option [value]="item.childDeptId">{{item.departmentName}}</option>
+                    }
                 </select>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
             </div>
             <div class="col-md-6">
                 <label for="role" class="form-label">Role</label>
-                <input type="text" class="form-control" id="role" placeholder="Enter role">
+                <input type="text" class="form-control" id="role" name="role" placeholder="Enter role">
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label for="gender" class="form-label">Gender</label>
+                <label for="gender" class="form-label" name="gender">Gender</label>
                 <select id="gender" class="form-select">
                     <option selected>Select gender</option>
                     <option value="Male">Male</option>
