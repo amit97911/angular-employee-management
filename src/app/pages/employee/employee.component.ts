@@ -18,9 +18,11 @@ export class EmployeeComponent implements OnInit {
   childDeptList = signal<IChildDept[]>([]);
   parentDeptId: number = 0;
   employeeObj: Employee = new Employee();
+  allEmployeeList = signal<Employee[]>([]);
 
   ngOnInit(): void {
     this.getParentDept();
+    this.getAllEmployee();
   }
 
   getParentDept() {
@@ -40,10 +42,16 @@ export class EmployeeComponent implements OnInit {
       (res: Employee) => {
         console.log(res);
       },
-      (error:any) => {
+      (error: any) => {
         console.log(error);
       }
     )
+  }
+
+  getAllEmployee() {
+    this.masterService.getAllEmployee().subscribe((res: Employee[]) => {
+      this.allEmployeeList.set(res);
+    });
   }
 
 }

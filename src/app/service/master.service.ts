@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IParentDeptResponse, IChildDeptResponse } from '../model/interface/master';
@@ -9,6 +9,9 @@ import { Employee } from '../model/class/employee';
 })
 export class MasterService {
   apiUrl: string = 'https://projectapi.gerasim.in/api/';
+
+  
+
   constructor(private http: HttpClient) { }
 
   getAllParentDept(): Observable<IParentDeptResponse> {
@@ -22,11 +25,16 @@ export class MasterService {
 
   CreateEmployee(employeeObj: Employee): Observable<Employee> {
     employeeObj.createdDate = new Date().toISOString();
-    console.log(employeeObj);
-    return this.http.post<Employee>(`${this.apiUrl}EmployeeManagement/CreateEmployee`, employeeObj)
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    return this.http.post<Employee>(`${this.apiUrl}EmployeeManagement/CreateEmployee`, employeeObj, { headers })
   }
 
-  
+  getAllEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiUrl}EmployeeManagement/GetAllEmployees`)
+  }
 
 
 }

@@ -91,7 +91,18 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Data rows go here -->
+            @for(item of allEmployeeList(); track $index){
+            <tr>
+                <td>{{ item.employeeId }}</td>
+                <td>{{ item.employeeName }}</td>
+                <td>{{ item.contactNo }}</td>
+                <td>{{ item.emailId }}</td>
+                <td>{{ item.deptId }}</td>
+                <td>{{ item.role }}</td>
+                <td>{{ item.gender }}</td>
+                <td>Action</td>
+            </tr>
+            }
         </tbody>
     </table>
 </div>
