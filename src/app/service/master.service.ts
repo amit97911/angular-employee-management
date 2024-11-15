@@ -10,7 +10,7 @@ import { Employee } from '../model/class/employee';
 export class MasterService {
   apiUrl: string = 'https://projectapi.gerasim.in/api/';
 
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class MasterService {
   }
 
   getChildDepartmentByParentId(deptId: number): Observable<IChildDeptResponse> {
-    deptId = 5150 //Keeping static as this Id has data for test
+    deptId = 5150 // Keeping static as this Id has data for test
     return this.http.get<IChildDeptResponse>(`${this.apiUrl}Complaint/GetChildDepartmentByParentId?deptId=${deptId}`)
   }
 
@@ -33,7 +33,15 @@ export class MasterService {
   }
 
   getAllEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrl}EmployeeManagement/GetAllEmployees`)
+    return this.http.get<Employee[]>(`${this.apiUrl}EmployeeManagement/GetAllEmployees`);
+  }
+
+  updateEmployee(employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiUrl}EmployeeManagement/UpdateEmployee/${employee.employeeId}`, employee);
+  }
+
+  deleteEmployee(employeeId: number): Observable<Employee> {
+    return this.http.delete<Employee>(`${this.apiUrl}EmployeeManagement/DeleteEmployee/${employeeId}`);
   }
 
 

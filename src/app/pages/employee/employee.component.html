@@ -37,7 +37,8 @@
                 <select id="parentDept" class="form-select" [(ngModel)]="parentDeptId" (change)="onParentDeptChange()"
                     name="parent_dept">
                     @for(item of parentDeptList(); track $index){
-                    <option [value]="item.departmentId">{{item.departmentName}}</option>
+                    <option [value]="item.departmentId" [selected]="item.departmentId === employeeObj.deptId">
+                        {{item.departmentName}}</option>
                     }
                 </select>
             </div>
@@ -66,14 +67,18 @@
             <div class="col-md-6">
                 <label for="gender" class="form-label">Gender</label>
                 <select id="gender" class="form-select" name="gender" [(ngModel)]="employeeObj.gender">
-                    <option selected>Select gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
         </div>
-        <button type="submit" (click)="onSave()" class="btn btn-primary mt-3">Submit</button>
+        <!-- Default is set to 0 in Employee Class  -->
+        @if(this.employeeObj.employeeId == 0){
+        <button type="submit" (click)="onSave()" class="btn btn-primary mt-3">Save</button>
+        }@else{
+        <button type="submit" (click)="onUpdate(this.employeeObj)" class="btn btn-warning mt-3">Update</button>
+        }
     </form>
     }
 
@@ -100,7 +105,11 @@
                 <td>{{ item.deptId }}</td>
                 <td>{{ item.role }}</td>
                 <td>{{ item.gender }}</td>
-                <td>Action</td>
+                <td>
+                    <button type="button" class="btn btn-primary mx-1" (click)="onEdit(item)">Edit </button>
+                    <button type="button" class="btn btn-danger mx-1"
+                        (click)="onDelete(item.employeeId)">Delete</button>
+                </td>
             </tr>
             }
         </tbody>

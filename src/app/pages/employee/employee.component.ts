@@ -41,6 +41,9 @@ export class EmployeeComponent implements OnInit {
     this.masterService.CreateEmployee(this.employeeObj).subscribe(
       (res: Employee) => {
         console.log(res);
+        this.getAllEmployee();
+        this.employeeObj = new Employee();
+        console.log("dddd", this.employeeObj);
       },
       (error: any) => {
         console.log(error);
@@ -52,6 +55,37 @@ export class EmployeeComponent implements OnInit {
     this.masterService.getAllEmployee().subscribe((res: Employee[]) => {
       this.allEmployeeList.set(res);
     });
+  }
+
+  onEdit(employee: Employee) {
+    this.isformVisible.set(true);
+    this.employeeObj = employee;
+  }
+
+  onDelete(employeeId: number) {
+    const allowDelete = confirm("Are you sure?");
+    if (allowDelete) {
+      this.masterService.deleteEmployee(employeeId).subscribe((res: Employee) => {
+        console.log(res);
+      },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  onUpdate(employee: Employee) {
+    this.masterService.updateEmployee(employee).subscribe(
+      (res: Employee) => {
+        console.log(res);
+        this.getAllEmployee();
+        this.employeeObj = new Employee();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
   }
 
 }
