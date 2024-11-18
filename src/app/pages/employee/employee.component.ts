@@ -38,22 +38,27 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSave() {
-    this.masterService.CreateEmployee(this.employeeObj).subscribe(
-      (res: Employee) => {
-        console.log(res);
+    this.masterService.CreateEmployee(this.employeeObj).subscribe({
+      next: (res: Employee) => {
+        console.log("onSave next", res);
         this.getAllEmployee();
         this.employeeObj = new Employee();
         console.log("dddd", this.employeeObj);
       },
-      (error: any) => {
-        console.log(error);
+      error: (error: any) => {
+        console.log("onSave error", error);
       }
-    )
+    });
   }
 
   getAllEmployee() {
-    this.masterService.getAllEmployee().subscribe((res: Employee[]) => {
-      this.allEmployeeList.set(res);
+    this.masterService.getAllEmployee().subscribe({
+      next: (res: Employee[]) => {
+        this.allEmployeeList.set(res);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
     });
   }
 
@@ -65,27 +70,28 @@ export class EmployeeComponent implements OnInit {
   onDelete(employeeId: number) {
     const allowDelete = confirm("Are you sure?");
     if (allowDelete) {
-      this.masterService.deleteEmployee(employeeId).subscribe((res: Employee) => {
-        console.log(res);
-      },
-        (error) => {
+      this.masterService.deleteEmployee(employeeId).subscribe({
+        next: (res: Employee) => {
+          console.log(res);
+        },
+        error: (error: any) => {
           console.log(error);
         }
-      )
+      });
     }
   }
 
   onUpdate(employee: Employee) {
-    this.masterService.updateEmployee(employee).subscribe(
-      (res: Employee) => {
+    this.masterService.updateEmployee(employee).subscribe({
+      next: (res: Employee) => {
         console.log(res);
         this.getAllEmployee();
         this.employeeObj = new Employee();
       },
-      (error: any) => {
+      error: (error: any) => {
         console.log(error);
       }
-    )
+    });
   }
 
 }
